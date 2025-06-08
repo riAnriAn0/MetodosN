@@ -35,18 +35,15 @@ def aprox(num, cdecimais):
     else:
         return parte_inteira / fator
 
-
 # Definir função f
 def f(x):
-    return 2*x**3 + x**2 - 2
-
+       return x**2 - 10*jnp.log(x) - 5
 
 # Definir 2º derivada da função f
 def f2(f, x):
     f1 = jax.grad(f)
     ff = jax.grad(f1)
     return aprox(ff(x), TOL)
-
 
 def cordas(f, a, b, TOL, N):
     i = 1
@@ -59,7 +56,7 @@ def cordas(f, a, b, TOL, N):
         print('\nExtremos do intervalo inválidos!')
         return None, None
     elif fa * fb > 0:
-        print('\nValores iniciais não satisfazem o teorema de Bolzano!')
+        print('\nO intervalo não contem uma raiz!')
         return None, None
 
     ffa = f2(f, a)
@@ -94,7 +91,6 @@ def cordas(f, a, b, TOL, N):
         fxn = fxnn
         i += 1
     print('\nNumero max de interações atingido!')
-
 
 retorno = cordas(f, 0.5, 1.0, TOL, 100)
 print(f"Raiz aproximada: {retorno[0]}")
