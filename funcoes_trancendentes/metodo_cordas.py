@@ -37,7 +37,7 @@ def aprox(num, cdecimais):
 
 # Definir função f
 def f(x):
-       return x**2 - 10*jnp.log(x) - 5
+    return x**2 - 5 * jnp.e + 1
 
 # Definir 2º derivada da função f
 def f2(f, x):
@@ -92,6 +92,6 @@ def cordas(f, a, b, TOL, N):
         i += 1
     print('\nNumero max de interações atingido!')
 
-retorno = cordas(f, 0.5, 1.0, TOL, 100)
+retorno = cordas(f, 3.0, 4.0, TOL, 100)
 print(f"Raiz aproximada: {retorno[0]}")
 print(f"Número de iterações: {retorno[1]}")

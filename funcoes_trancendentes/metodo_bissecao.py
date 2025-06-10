@@ -1,14 +1,3 @@
-#    Função Python ------------ Substituto JAX (jnp)
-#        math.log(x)	        jnp.log(x)
-#        math.exp(x)	        jnp.exp(x)
-#        math.sin(x)	        jnp.sin(x)
-#        math.cos(x)	        jnp.cos(x)
-#        math.tan(x)	        jnp.tan(x)
-#        math.sqrt(x)	        jnp.sqrt(x)
-#        math.pow(x, y)	        jnp.power(x, y)
-#        abs(x)		            jnp.abs(x)
-#                               jnp.e() =~  2.7182817
-
 import math
 
 # Definir constante de tolerância
@@ -34,7 +23,7 @@ def aprox(num, cdecimais):
         return parte_inteira/fator
 
 def f(x):
-    return x**3 - math.e**(2*x) + 3
+    return x**2 - 5 * math.e + 1
 
 def bissecao(f, a, b, TOL, N):
     i = 1
@@ -65,7 +54,7 @@ def bissecao(f, a, b, TOL, N):
             b = p
     raise NameError('Num. max. de itererações foi atingido!')
 
-retorno = bissecao(f, 4, 6, TOL, 100)
+retorno = bissecao(f, 3, 4, TOL, 100)
 
 print(f"Raiz aproximada: {retorno[0]}")
 print(f"Numero de itereações: {retorno[1]}")

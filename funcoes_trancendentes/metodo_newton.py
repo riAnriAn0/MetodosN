@@ -37,7 +37,7 @@ def aprox(num, cdecimais):
 
 # Definir função f
 def f(x):
-    return x**2 - 10*jnp.log(x) - 5
+    return x**2 - 5 * jnp.e + 1
 
 # Definir 1º derivada da função f
 def df(f, x):
@@ -91,6 +91,6 @@ def newton(f, a, b, TOL, N):
     print('\nNumero max de interações atingido!')
 
 
-retorno = newton(f, 4, 5, TOL, 100)
+retorno = newton(f, 3.0, 4.0, TOL, 100)
 print(f"Raiz aproximada: {retorno[0]}")
 print(f"Número de iterações: {retorno[1]}")
