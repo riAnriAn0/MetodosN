@@ -37,13 +37,19 @@ def aprox(num, cdecimais):
 
 # Definir função f
 def f(x):
-    return x**2 - 5 * jnp.e + 1
-
+    return 0.2*x**3 - 3.006*x**2 + 15.06*x - 25.15
 # Definir 2º derivada da função f
 def f2(f, x):
     f1 = jax.grad(f)
     ff = jax.grad(f1)
     return aprox(ff(x), TOL)
+
+def tab(n, Xn, fxn, erro=0.0):
+    if n == 1:
+        print("  N |     Xn     |    fxn     |     Erro  ")
+    
+    print("+--------------------------------------------------")
+    print(f"{n:>3} | {Xn:>10.6f} | {fxn:>10.6f} | {erro:>10.6f}")
 
 def cordas(f, a, b, TOL, N):
     i = 1
@@ -83,6 +89,9 @@ def cordas(f, a, b, TOL, N):
         xnn = aprox(xn - (fxn * (xn - c)) / (fxn - fc), TOL)
         fxnn = f(xnn)
 
+        tab(i, xnn, fxnn, erro)
+        erro = fxnn - fxn
+
         # condicao de parada
         if (fxnn == 0) or (jnp.abs(xnn - xn) < TOL):
             return aprox(xnn, TOL), i
@@ -92,6 +101,6 @@ def cordas(f, a, b, TOL, N):
         i += 1
     print('\nNumero max de interações atingido!')
 
-retorno = cordas(f, 3.0, 4.0, TOL, 100)
-print(f"Raiz aproximada: {retorno[0]}")
+retorno = cordas(f, 5.24, 6, TOL, 100)
+print(f"\nRaiz aproximada: {retorno[0]}")
 print(f"Número de iterações: {retorno[1]}")

@@ -23,12 +23,21 @@ def aprox(num, cdecimais):
         return parte_inteira/fator
 
 def f(x):
-    return x**2 - 5 * math.e + 1
+    return 0.2*x**3 - 3.006*x**2 + 15.06*x - 25.15 
+
+def tab(n, An, Bn, Xn, fxn, erro = 0.0):
+    if n == 1:
+        print(" N  |     An     |     Bn     |     Xn     |     fxn    |     Erro  ")
+    
+    print("+---------------------------------------------------------------")
+    print(f"{n:>3} | {An:>10.6f} | {Bn:>10.6f} | {Xn:>10.6f} | {fxn:>10.6f} | {erro:>10.6f}")
+    
 
 def bissecao(f, a, b, TOL, N):
     i = 1
     fa = aprox(f(a),TOL)
     fb = aprox(f(b),TOL)
+    erro = 0.0
 
     # Verificar se os valores iniciais estão corretos
     if a >= b or a == b:
@@ -42,6 +51,10 @@ def bissecao(f, a, b, TOL, N):
         # iteracao da bissecao
         p = aprox((a + (b - a) / 2),TOL)
         fp = aprox(f(p),TOL)
+        
+        tab(i, a, b, p, fp, erro)
+        erro = f(p) - fp
+
         # condicao de parada
         if (fp == 0) or ((b - a) / 2 < TOL):
             return p, i
@@ -54,7 +67,7 @@ def bissecao(f, a, b, TOL, N):
             b = p
     raise NameError('Num. max. de itererações foi atingido!')
 
-retorno = bissecao(f, 3, 4, TOL, 100)
+retorno = bissecao(f,5.01, 5.5 , TOL, 100)
 
-print(f"Raiz aproximada: {retorno[0]}")
+print(f"\nRaiz aproximada: {retorno[0]}")
 print(f"Numero de itereações: {retorno[1]}")

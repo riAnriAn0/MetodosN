@@ -37,8 +37,7 @@ def aprox(num, cdecimais):
 
 # Definir função f
 def f(x):
-    return x**2 - 5 * jnp.e + 1
-
+    return 0.2*x**3 - 3.006*x**2 +  15.06*x - 25.15 
 # Definir 1º derivada da função f
 def df(f, x):
     df1 = jax.grad(f)
@@ -49,6 +48,13 @@ def dff(f, x):
     df1 = jax.grad(f)
     df2 = jax.grad(df1)
     return aprox(df2(x), TOL)
+   
+def tab(n , Xn, fxn, erro = 0.0):
+    if n == 1:
+        print("  N |     Xn     |    fxn     |     Erro  ")
+    
+    print("+--------------------------------------------------")
+    print(f"{n:>3} | {Xn:>10.6f} | {fxn:>10.6f} | {erro:>10.6f}")
 
 def newton(f, a, b, TOL, N):
     i = 1
@@ -82,6 +88,10 @@ def newton(f, a, b, TOL, N):
         xnn = aprox(xn - ( f(xn) / df(f,xn) ), TOL)
         fxnn = f(xnn)
 
+        tab(i, xnn, fxnn, erro)
+
+        erro = jnp.abs(xnn - xn)
+
         # condicao de parada
         if (fxnn == 0) or (jnp.abs(xnn - xn) < TOL):
             return aprox(xnn, TOL), i
@@ -91,6 +101,6 @@ def newton(f, a, b, TOL, N):
     print('\nNumero max de interações atingido!')
 
 
-retorno = newton(f, 3.0, 4.0, TOL, 100)
+retorno = newton(f, 4.0, 5.1, TOL, 100)
 print(f"Raiz aproximada: {retorno[0]}")
 print(f"Número de iterações: {retorno[1]}")
